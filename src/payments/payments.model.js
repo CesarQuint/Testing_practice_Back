@@ -3,21 +3,25 @@ const Model = require('mongoose').model
 const ObjectId = require('mongoose').Types.ObjectId
 const Messages = require('./payments.messages')
 
-const schema=new Schema({
+const schema = new Schema({
     
     user: {
         type: ObjectId,
         ref: 'Users',
     },
+
     userId: {
         type: ObjectId,
     },
+
     name: {
         type: String,
     },
-    amount:{
+
+    amount: {
         type:Number,
     },
+
     updated: {
         type: Date
     },
@@ -28,10 +32,8 @@ const schema=new Schema({
     }
 })
 
-//TODO: Corregir las funciones de errores
-
 schema.pre('save', function(next) {
-    this.user=this.userId
+    this.user = this.userId
     next()
 })
 

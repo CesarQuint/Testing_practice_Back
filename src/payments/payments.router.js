@@ -1,7 +1,6 @@
-const Router =require('express').Router()
-const Hub=require('./payments.hub')
-const  Middlewares=require('../middlewares')
-
+const Router = require('express').Router()
+const Hub = require('./payments.hub')
+const Middlewares = require('../middlewares')
 
 Router.post('/payments', Middlewares.auth, Hub.createPayment)
 

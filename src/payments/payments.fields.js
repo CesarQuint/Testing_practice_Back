@@ -1,6 +1,6 @@
-const Validator= require('../validator')
+const Validator = require('../validator')
 
-module.exports=class Fields{
+module.exports = class Fields {
 
     constructor(request){
 
@@ -11,15 +11,13 @@ module.exports=class Fields{
             ...request.query,
             ...request.body,
         }
-        console.log(this.props);
 
-        this.userId=new Validator({
+        this.userId = new Validator({
             type: 'objectId',
             name: 'identificador del usuario',
             prop: 'userId',
             value: this.props.userId,
         })
-
         
         this.paymentId = new Validator({
             type: 'objectId',
@@ -41,8 +39,5 @@ module.exports=class Fields{
             prop: 'amount',
             value: this.props.amount,
         })
-
     }
-
-
 }

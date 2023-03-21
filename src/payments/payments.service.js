@@ -1,8 +1,8 @@
 const Model = require('./payments.model')
-const Messages =require('./payments.messages')
-const Utils =require('../utils')
+const Messages = require('./payments.messages')
+const Utils = require('../utils')
 
-module.exports={
+module.exports = {
     createPayment,
     getPayments,
     getPayment,
@@ -12,11 +12,15 @@ module.exports={
     Messages
 }
 
-async function createPayment(data){
+async function createPayment(data) {
     try {
+
         const payment = new Model(data)
+
         await  payment.save()
+
         return getPayment(payment._id)
+
     } catch (error) {
         throw error
     }
@@ -29,9 +33,9 @@ async function getPayments(query) {
         const limit = 100
         const page = query.page
 
-        if(query.find){
-            const regexp=new RegExp(query.find,'i')
-            options.$or=[
+        if(query.find) {
+            const regexp = new RegExp(query.find,'i')
+            options.$or = [
                 {name:regexp}
             ]
         }
@@ -39,42 +43,45 @@ async function getPayments(query) {
         if(query.userId)
             options.userId = query.userId
 
-        const payments=await Model.find(options)
+        const payments = await Model.find(options)
             .skip(page*limit)
             .limit(limit)
-            .sort({created:-1})
+            .sort({created: -1})
             .populate({
                 path: 'user',
                 select: {
                     name: true
                 }
-            
             })
         
-        const total =await Model.countDocuments(options)
+        const total = await Model.countDocuments(options)
 
         return{
             payments,
-            metadata:Utils.metadata(page,limit,total,payments.length,query)
+            metadata:Utils.metadata(page, limit, total, payments.length, query)
         }
     } catch (error) {
         throw error
     }
 }
-async function getPayment(paymentId){
+
+async function getPayment(paymentId) {
     try {
-        const payment = await Model.findOne({_id:paymentId})
+
+        const payment = await Model.findOne({_id: paymentId})
             .populate('user')
 
         if(!payment)
             throw new Messages(paymentId).paymentNotFound
 
         return payment
+
     } catch (error) {
         throw payment
     }
 }
-async function updatePayment(paymentId,data){
+
+async function updatePayment(paymentId,data) {
     try {
 
         const payment = await getPayment(paymentId)
@@ -92,7 +99,7 @@ async function updatePayment(paymentId,data){
     }
 }
 
-async function deletePayment(paymentId){
+async function deletePayment(paymentId) {
     try {
 
         await getPayment(paymentId)

@@ -1,7 +1,7 @@
 const Fields = require('./payments.fields')
-const Service=require('./payments.service')
+const Service = require('./payments.service')
 
-module.exports={
+module.exports = {
     createPayment,
     getPayments,
     getPayment,
@@ -9,12 +9,12 @@ module.exports={
     deletePayment
 }
 
-async function createPayment(request,response){
+async function createPayment(request,response) {
     try {
 
         const fields = new Fields(request)
         const data = {
-            userId:fields.userId.get(),
+            userId: fields.userId.get(),
             name: fields.name.get(),
             amount: fields.amount.get(),
         }
@@ -26,30 +26,31 @@ async function createPayment(request,response){
     }
 }
 
-async function getPayments(request,response){
+async function getPayments(request,response) {
     try {
-        
+
         const query = {
             userId: request.query.userId || request.userId,
             page: parseInt(request.query.page || 0),
             find: request.query.find,
-            all:request.query.all
+            all: request.query.all
         }
 
         if(query.all)
             delete query.userId
 
         response.__data(await Service.getPayments(query))
-        
+
     } catch (error) {
         response.__error(error)
     }
 }
-async function getPayment(request,response){
+async function getPayment(request,response) {
     try {
+
         const fields = new Fields(request)
 
-        const data={
+        const data = {
             paymentId:fields.paymentId.get()
         }
 
@@ -59,19 +60,21 @@ async function getPayment(request,response){
         response.__error(error)
     }
 }
-async function updatePayment(request,response){
+async function updatePayment(request,response) {
     try {
-        const fields =new Fields(request)
 
-        let data={
-            paymentId:fields.paymentId.get()
+        const fields = new Fields(request)
+
+        let data = {
+            paymentId: fields.paymentId.get()
         }
 
-        const props=[
+        const props = [
             'name',
             'amount'
         ]
-        props.forEach(prop=> request.body[prop] != undefined && (data[prop]=fields[prop].get()))
+
+        props.forEach(prop => request.body[prop] != undefined && (data[prop] = fields[prop].get()))
 
         response.__data(await Service.updatePayment(data.paymentId,data))
 
@@ -79,7 +82,7 @@ async function updatePayment(request,response){
         response.__error(error)
     }
 }
-async function deletePayment(request,response){
+async function deletePayment(request,response) {
     try {
 
         const fields = new Fields(request)
