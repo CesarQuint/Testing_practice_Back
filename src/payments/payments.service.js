@@ -15,7 +15,8 @@ module.exports={
 async function createPayment(data){
     try {
         const payment = new Model(data)
-        return await  payment.save()
+        await  payment.save()
+        return getPayment(payment._id)
     } catch (error) {
         throw error
     }
@@ -63,6 +64,7 @@ async function getPayments(query) {
 async function getPayment(paymentId){
     try {
         const payment = await Model.findOne({_id:paymentId})
+            .populate('user')
 
         if(!payment)
             throw new Messages(paymentId).paymentNotFound
@@ -82,7 +84,8 @@ async function updatePayment(paymentId,data){
             payment[key] = data[key]
         })
 
-        return await payment.save()
+        await payment.save()
+        return getPayment(payment._id)
 
     } catch(error) {
         throw error
