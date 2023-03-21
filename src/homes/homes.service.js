@@ -19,7 +19,9 @@ async function createHome(data) {
 
         const home = new Model(data)
 
-        return await home.save()
+        await home.save()
+
+        return getHome(home._id)
 
     } catch(error) {
         throw error
@@ -40,10 +42,19 @@ async function getHomes(query) {
             ]
         }
 
+        if(query.userId)
+            options.userId = query.userId
+
         const homes = await Model.find(options)
             .skip(page * limit)
             .limit(limit)
             .sort({created: -1})
+            .populate({
+                path: 'user',
+                select: {
+                    name: true
+                }
+            })
 
         const total = await Model.countDocuments(options)
 
@@ -61,6 +72,7 @@ async function getHome(homeId) {
     try {
 
         const home = await Model.findOne({_id: homeId})
+            .populate('user')
 
         if(!home)
             throw new Messages(homeId).homeNotFound

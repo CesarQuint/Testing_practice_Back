@@ -5,6 +5,16 @@ const Messages = require('./homes.messages')
 
 const schema = new Schema({
 
+
+    user: {
+        type: ObjectId,
+        ref: 'Users',
+    },
+
+    userId: {
+        type: ObjectId,
+    },
+
     name: {
         type: String,
     },
@@ -24,6 +34,7 @@ const schema = new Schema({
 })
 
 schema.pre('save', function(next) {
+    this.user = this.userId
     next()
 })
 

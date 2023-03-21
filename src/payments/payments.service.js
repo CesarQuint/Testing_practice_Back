@@ -77,7 +77,7 @@ async function getPayment(paymentId) {
         return payment
 
     } catch (error) {
-        throw payment
+        throw error
     }
 }
 

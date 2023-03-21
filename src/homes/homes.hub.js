@@ -15,6 +15,7 @@ async function createHome(request, response) {
         const fields = new Fields(request)
 
         const data = {
+            userId: fields.userId.get(),
             name: fields.name.get(),
             description: fields.description.get(),
         }
@@ -30,9 +31,14 @@ async function getHomes(request, response) {
     try {
 
         const query = {
+            userId: request.query.userId || request.userId,
             page: parseInt(request.query.page || 0),
-            find: request.query.find
+            find: request.query.find,
+            all: request.query.all
         }
+
+        if(query.all)
+            delete query.userId
 
         response.__data(await Service.getHomes(query))
 
