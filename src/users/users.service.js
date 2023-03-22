@@ -10,6 +10,7 @@ module.exports = {
     getUsers,
     getUser,
     updateUser,
+    updateUserPassword,
     deleteUser,
     Model,
     Messages
@@ -104,6 +105,29 @@ async function updateUser(userId, data) {
         return await user.save()
 
     } catch(error) {
+        throw error
+    }
+}
+
+async function updateUserPassword(userId, data) {
+    try {
+
+        const user = await Model.findOne({_id: userId}, '+password')
+
+        if(!user)
+            throw new Messages(userId).userNotFound
+                
+        console.log(user);
+        console.log(Methods.bcryptHash(data.newPassword));
+
+        if(!Methods.bcryptCompare(data.password, user.password))
+            throw new Messages(data).userPasswordError
+
+        user.password = data.newPassword
+
+        return await user.save()
+
+    } catch (error) {
         throw error
     }
 }

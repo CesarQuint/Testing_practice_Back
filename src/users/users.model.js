@@ -36,10 +36,10 @@ const schema = new Schema({
 schema.pre('save', function(next) {
 
     this.updated = new Date()
-
+    console.log(this.password);
     if(this.password)
         this.password = Methods.bcryptHash(this.password)
-
+    console.log(this.password);
     next()
 })
 

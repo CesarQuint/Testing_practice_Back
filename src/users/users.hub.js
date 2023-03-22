@@ -7,6 +7,7 @@ module.exports = {
     getUsers,
     getUser,
     updateUser,
+    updateUserPassword,
     deleteUser
 }
 
@@ -95,6 +96,24 @@ async function updateUser(request, response) {
         response.__data(await Service.updateUser(data.userId, data))
 
     } catch(error) {
+        response.__error(error)
+    }
+}
+
+async function updateUserPassword(request, response) {
+    try {
+
+        const fields = new Fields(request)
+
+        let data = {
+            userId: fields.userId.get(),
+            newPassword: fields.newPassword.get(),
+            password: fields.password.get()
+        }
+
+        response.__data(await Service.updateUserPassword(data.userId, data))
+
+    } catch (error) {
         response.__error(error)
     }
 }

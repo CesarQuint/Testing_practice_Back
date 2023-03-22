@@ -10,6 +10,8 @@ Router.get('/users/:userId', Middlewares.auth, Hub.getUser)
 
 Router.get('/users', Middlewares.auth, Hub.getUsers)
 
+Router.put('/users/:userId/password', Middlewares.auth, Hub.updateUserPassword)
+
 Router.put('/users/:userId', Middlewares.auth, Hub.updateUser)
 
 Router.delete('/users/:userId', Middlewares.auth, Hub.deleteUser)

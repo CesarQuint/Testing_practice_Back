@@ -52,7 +52,7 @@ async function getHomes(query) {
             .populate({
                 path: 'user',
                 select: {
-                    name: true
+                    name: true,
                 }
             })
 
@@ -94,7 +94,9 @@ async function updateHome(homeId, data) {
             home[key] = data[key]
         })
 
-        return await home.save()
+        await home.save()
+
+        return getHome(homeId)
 
     } catch(error) {
         throw error
