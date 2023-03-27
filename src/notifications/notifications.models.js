@@ -1,36 +1,23 @@
 const Schema = require('mongoose').Schema
 const Model = require('mongoose').model
 const ObjectId = require('mongoose').Types.ObjectId
-const Messages = require('./homes.messages')
+const Messages = require('./notifications.messages')
 
 const schema = new Schema({
-
-    user: {
-        type: ObjectId,
-        ref: 'Users',
-    },
-
-    userId: {
-        type: ObjectId,
-    },
-    
-    street: {
+  
+    title: {
         type: String
     },
 
-    exnumber: {
+    description: {
         type: String
     },
 
-    intnumber: {
+    type: {
         type: String
     },
 
-    colony: {
-        type: String
-    },
-
-    section: {
+    relevance: {
         type: String
     },
 
@@ -41,6 +28,16 @@ const schema = new Schema({
     created: {
         type: Date,
         default: Date.now
+    },
+
+    
+    user: {
+        type: ObjectId,
+        ref: 'Users',
+    },
+
+    userId: {
+        type: ObjectId,
     }
 })
 
@@ -69,4 +66,5 @@ schema.post('find', function(err, doc, next) {
     next()
 })
 
-module.exports = Model('Homes', schema)
+
+module.exports = Model('notifications', schema)

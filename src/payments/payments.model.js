@@ -5,21 +5,29 @@ const Messages = require('./payments.messages')
 
 const schema = new Schema({
     
-    user: {
+    home: {
         type: ObjectId,
-        ref: 'Users',
+        ref: 'Homes',
     },
 
-    userId: {
+    homeId: {
         type: ObjectId,
     },
 
-    name: {
+    concept: {
+        type: String,
+    },
+
+    reference: {
         type: String,
     },
 
     amount: {
         type:Number,
+    },
+    
+    paymentphoto: {
+        type: String,
     },
 
     updated: {
@@ -33,7 +41,7 @@ const schema = new Schema({
 })
 
 schema.pre('save', function(next) {
-    this.user = this.userId
+    this.home = this.homeId
     next()
 })
 

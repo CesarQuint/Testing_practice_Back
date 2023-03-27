@@ -5,28 +5,28 @@ module.exports = class Messages {
         this.homeSaveError = {
             code: 503,
             key: 'homeSaveError',
-            message: $message || 'Error al guardar la información del ',
+            message: $message || 'Error al guardar la información  de la casa',
             $details
         }
 
         this.homeGetError = {
             code: 503,
             key: 'homeGetError',
-            message: $message || 'Error al obtener la información del ',
+            message: $message || 'Error al obtener la información  de la casa',
             $details
         }
 
         this.homeNotFound = {
             code: 404,
             key: 'homeNotFound',
-            message: $message || 'El registro del  no fue encontrado',
+            message: $message || 'El registro  de la casa no fue encontrado',
             $details
         }
 
         this.homeDeleteError = {
             code: 503,
             key: 'homeDeleteError',
-            message: $message || 'Error al borrar la información del ',
+            message: $message || 'Error al borrar la información  de la casa',
             $details
         }
     }

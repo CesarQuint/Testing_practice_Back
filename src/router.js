@@ -16,6 +16,6 @@ module.exports = [
     require('./users/users.router'),
     require('./sessions/sessions.router'),
     require('./homes/homes.router'),
-    require('./payments/payments.router')
-
+    require('./payments/payments.router'),
+    require('./notifications/notifications.router')
 ]
