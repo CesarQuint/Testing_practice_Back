@@ -14,9 +14,12 @@ async function createPayment(request,response) {
 
         const fields = new Fields(request)
         const data = {
-            userId: fields.userId.get(),
-            name: fields.name.get(),
+            homeId: fields.homeId.get(),
+            concept: fields.concept.get(),
+            reference: fields.reference.get(),
+            paymentphoto: fields.paymentphoto.get(),
             amount: fields.amount.get(),
+            status:'pending..'
         }
 
         response.__data(await Service.createPayment(data))
@@ -30,14 +33,14 @@ async function getPayments(request,response) {
     try {
 
         const query = {
-            userId: request.query.userId || request.userId,
+            homeId: request.query.homeId || request.homeId,
             page: parseInt(request.query.page || 0),
             find: request.query.find,
             all: request.query.all
         }
 
         if(query.all)
-            delete query.userId
+            delete query.homeId
 
         response.__data(await Service.getPayments(query))
 
@@ -72,8 +75,10 @@ async function updatePayment(request,response) {
         }
 
         const props = [
-            'name',
-            'amount'
+            'concept',
+            'paymentphoto',
+            'amount',
+            'status'
         ]
 
         props.forEach(prop => request.body[prop] != undefined && (data[prop] = fields[prop].get()))

@@ -72,8 +72,11 @@ async function updateNotification(request,response) {
         }
 
         const props = [
-            'name',
-            'title'
+            'userId',
+            'title',
+            'description',
+            'relevance',
+            'type'
         ]
 
         props.forEach(prop => request.body[prop] != undefined && (data[prop] = fields[prop].get()))

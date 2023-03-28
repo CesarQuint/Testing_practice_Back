@@ -40,15 +40,15 @@ async function getPayments(query) {
             ]
         }
 
-        if(query.userId)
-            options.userId = query.userId
+        if(query.homeId)
+            options.homeId = query.homeId
 
         const payments = await Model.find(options)
             .skip(page*limit)
             .limit(limit)
             .sort({created: -1})
             .populate({
-                path: 'user',
+                path: 'home',
                 select: {
                     name: true
                 }
@@ -69,7 +69,7 @@ async function getPayment(paymentId) {
     try {
 
         const payment = await Model.findOne({_id: paymentId})
-            .populate('user')
+            .populate('home')
 
         if(!payment)
             throw new Messages(paymentId).paymentNotFound

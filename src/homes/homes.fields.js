@@ -26,19 +26,43 @@ module.exports = class Fields {
             value: this.props.homeId,
         })
 
-        this.name = new Validator({
+        this.street = new Validator({
             type: 'string',
-            name: 'nombre',
-            prop: 'name',
-            value: this.props.name,
+            name: 'calle',
+            prop: 'street',
+            value: this.props.street,
         })
 
-        this.description = new Validator({
+
+        this.extnumber = new Validator({
             type: 'string',
-            name: 'descripción',
-            prop: 'description',
-            value: this.props.description,
+            name: 'numero exterior',
+            prop: 'extnumber',
+            value: this.props.extnumber,
         })
 
+
+        this.intnumber = new Validator({
+            type: 'string',
+            name: 'numero interior',
+            prop: 'intnumber',
+            value: this.props.intnumber,
+        })
+
+
+        this.colony = new Validator({
+            type: 'string',
+            name: 'colonia',
+            prop: 'colony',
+            value: this.props.colony,
+        })
+
+        
+        this.section = new Validator({
+            type: 'string',
+            name: 'seccion',
+            prop: 'section',
+            value: this.props.colony,
+        })       
     }
 }

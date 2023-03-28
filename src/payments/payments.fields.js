@@ -5,18 +5,18 @@ module.exports = class Fields {
     constructor(request){
 
         this.props = {
-            userId: request.userId,
+            homeId: request.homeId,
             ...request.headers,
             ...request.params,
             ...request.query,
             ...request.body,
         }
 
-        this.userId = new Validator({
+        this.homeId = new Validator({
             type: 'objectId',
-            name: 'identificador del usuario',
-            prop: 'userId',
-            value: this.props.userId,
+            name: 'identificador de la casa',
+            prop: 'homeId',
+            value: this.props.homeId,
         })
         
         this.paymentId = new Validator({
@@ -26,18 +26,39 @@ module.exports = class Fields {
             value: this.props.paymentId,
         })
 
-        this.name = new Validator({
+        this.concept = new Validator({
             type: 'string',
-            name: 'nombre',
-            prop: 'name',
-            value: this.props.name,
+            name: 'concepto',
+            prop: 'concept',
+            value: this.props.concept,
+        })
+        
+        this.reference = new Validator({
+            type: 'string',
+            name: 'referencia',
+            prop: 'reference',
+            value: this.props.reference,
+        })
+        
+        this.paymentphoto = new Validator({
+            type: 'string',
+            name: 'foto de pago',
+            prop: 'paymentphoto',
+            value: this.props.paymentphoto,
         })
         
         this.amount = new Validator({
             type: 'float',
-            name: 'monto',
+            name: 'cantidad',
             prop: 'amount',
             value: this.props.amount,
+        })
+
+        this.status = new Validator({
+            type: 'string',
+            name: 'estado de pago',
+            prop: 'status',
+            value: this.props.status
         })
     }
 }

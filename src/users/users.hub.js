@@ -37,6 +37,7 @@ async function createUser(request, response) {
             name: fields.name.get(),
             email: fields.email.get(),
             password: fields.password.get(),
+
         }
 
         response.__data(await Service.createUser(data))

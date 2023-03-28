@@ -16,8 +16,11 @@ async function createHome(request, response) {
 
         const data = {
             userId: fields.userId.get(),
-            name: fields.name.get(),
-            description: fields.description.get(),
+            street: fields.street.get(),
+            extnumber: fields.extnumber.get(),
+            intnumber: fields.intnumber.get(),
+            colony: fields.colony.get(),
+            section: fields.section.get(),
         }
 
         response.__data(await Service.createHome(data))
@@ -73,8 +76,12 @@ async function updateHome(request, response) {
         }
 
         const props = [
-            'name',
-            'description',
+            'userId',
+            'street',
+            'extnumber',
+            'intnumber',
+            'colony',
+            'section',
         ]
 
         props.forEach(prop => request.body[prop] != undefined && (data[prop] = fields[prop].get()))
