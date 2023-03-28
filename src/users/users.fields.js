@@ -45,5 +45,12 @@ module.exports = class Fields {
             prop: 'newPassword',
             value: this.props.newPassword,
         })
+
+        this.role = new Validator({
+            type: 'array',
+            name: 'rol',
+            prop: 'role',
+            value:this.props.role
+        })
     }
 }

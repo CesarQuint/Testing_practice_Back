@@ -21,7 +21,7 @@ const schema = new Schema({
     password: {
         type: String,
         select: false
-    },
+    },         
 
     updated: {
         type: Date

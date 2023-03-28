@@ -39,7 +39,8 @@ async function createUser(data) {
 
         const user = new Model(data)
 
-        return await user.save()
+        await user.save()
+        
 
     } catch(error) {
         throw error
