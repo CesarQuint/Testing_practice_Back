@@ -45,6 +45,7 @@ async function getPayments(request,response) {
         response.__error(error)
     }
 }
+
 async function getPayment(request,response) {
     try {
 
@@ -60,6 +61,7 @@ async function getPayment(request,response) {
         response.__error(error)
     }
 }
+
 async function updatePayment(request,response) {
     try {
 
@@ -82,6 +84,7 @@ async function updatePayment(request,response) {
         response.__error(error)
     }
 }
+
 async function deletePayment(request,response) {
     try {
 

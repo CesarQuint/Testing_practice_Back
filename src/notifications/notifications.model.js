@@ -30,7 +30,6 @@ const schema = new Schema({
         default: Date.now
     },
 
-    
     user: {
         type: ObjectId,
         ref: 'Users',

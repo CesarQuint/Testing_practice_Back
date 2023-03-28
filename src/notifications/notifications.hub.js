@@ -15,8 +15,10 @@ async function createNotification(request,response) {
         const fields = new Fields(request)
         const data = {
             userId: fields.userId.get(),
-            name: fields.name.get(),
-            amount: fields.amount.get(),
+            title: fields.title.get(),
+            description: fields.description.get(),
+            relevance: fields.relevance.get(),
+            type: fields.type.get(),
         }
 
         response.__data(await Service.createNotification(data))
@@ -51,10 +53,10 @@ async function getNotification(request,response) {
         const fields = new Fields(request)
 
         const data = {
-            NotificationId:fields.NotificationId.get()
+            notificationId:fields.notificationId.get()
         }
 
-        response.__data(await Service.getNotification(data.NotificationId))
+        response.__data(await Service.getNotification(data.notificationId))
 
     } catch (error) {
         response.__error(error)
@@ -66,17 +68,17 @@ async function updateNotification(request,response) {
         const fields = new Fields(request)
 
         let data = {
-            NotificationId: fields.NotificationId.get()
+            notificationId: fields.notificationId.get()
         }
 
         const props = [
             'name',
-            'amount'
+            'title'
         ]
 
         props.forEach(prop => request.body[prop] != undefined && (data[prop] = fields[prop].get()))
 
-        response.__data(await Service.updateNotification(data.NotificationId,data))
+        response.__data(await Service.updateNotification(data.notificationId,data))
 
     } catch (error) {
         response.__error(error)
@@ -88,10 +90,10 @@ async function deleteNotification(request,response) {
         const fields = new Fields(request)
 
         const data = {
-            NotificationId: fields.NotificationId.get()
+            notificationId: fields.notificationId.get()
         }
 
-        response.__data(await Service.deleteNotification(data.NotificationId))
+        response.__data(await Service.deleteNotification(data.notificationId))
 
     } catch(error) {
         response.__error(error)
