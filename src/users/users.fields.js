@@ -5,6 +5,7 @@ module.exports = class Fields {
     constructor(request) {
 
         this.props = {
+            homeId:request.homeId,
             ...request.headers,
             ...request.params,
             ...request.query,
@@ -13,7 +14,7 @@ module.exports = class Fields {
 
         this.userId = new Validator({
             type: 'objectId',
-            name: 'identificador del usuario',
+            name: 'identificador',
             prop: 'userId',
             value: this.props.userId,
         })
@@ -58,6 +59,13 @@ module.exports = class Fields {
             name: 'rol',
             prop: 'role',
             value:this.props.role
+        })
+
+        this.homeId = new Validator({
+            type: 'objectId',
+            name: 'identificador de casa',
+            prop: 'homeId',
+            value:this.props.homeId
         })
     }
 }

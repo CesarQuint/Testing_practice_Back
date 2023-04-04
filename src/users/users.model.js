@@ -7,7 +7,8 @@ const Methods = require('../methods')
 const schema = new Schema({
 
     role: {
-        type: [String]
+        type: String,
+        default : 'user'
     },
 
     name: {

@@ -18,7 +18,7 @@ module.exports = new Promise((resolve, reject) => {
 
             if(!user) {
                 await Services.Users.createUser({
-                    role: ['admin'],
+                    role: 'admin',
                     name: 'Admin',
                     phone: '1234567890',
                     email: `admin@${ Config.brand }.com`,

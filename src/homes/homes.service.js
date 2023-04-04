@@ -16,13 +16,7 @@ module.exports = {
 
 async function createHome(data) {
     try {
-
-        const exhome = await Model.find({userId:data.userId})
-
-        if(exhome){
-            throw new Messages().homeAlreadyExist  
-        }
-
+        
         const home = new Model(data)
 
         await home.save()
