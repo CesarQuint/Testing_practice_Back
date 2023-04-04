@@ -32,6 +32,13 @@ module.exports = class Fields {
             value: this.props.email,
         })
     
+        this.phone = new Validator({
+            type: 'string',
+            name: 'telefono',
+            prop: 'phone',
+            value: this.props.phone,
+        })
+    
         this.password = new Validator({
             type: 'string',
             name: 'contraseña',

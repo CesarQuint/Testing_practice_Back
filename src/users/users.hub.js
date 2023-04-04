@@ -37,6 +37,7 @@ async function createUser(request, response) {
             name: fields.name.get(),
             email: fields.email.get(),
             password: fields.password.get(),
+            phone: fields.phone.get(),
             role:['user']
         }
 
@@ -90,7 +91,7 @@ async function updateUser(request, response) {
         const props = [
             'name',
             'phone',
-            'email'
+            'email',
         ]
 
         props.forEach(prop => request.body[prop] != undefined && (data[prop] = fields[prop].get()))

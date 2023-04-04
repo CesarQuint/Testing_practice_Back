@@ -18,6 +18,10 @@ const schema = new Schema({
         type: String
     },
 
+    phone: {
+        type: String
+    },
+
     password: {
         type: String,
         select: false

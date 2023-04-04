@@ -62,7 +62,7 @@ module.exports = class Fields {
             type: 'string',
             name: 'seccion',
             prop: 'section',
-            value: this.props.colony,
+            value: this.props.section,
         })       
     }
 }

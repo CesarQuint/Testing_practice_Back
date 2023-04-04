@@ -43,6 +43,9 @@ async function getNotifications(query) {
         if(query.userId)
             options.userId = query.userId
 
+        if(query.type)
+            options.type = query.type
+
         const notifications = await Model.find(options)
             .skip(page*limit)
             .limit(limit)
