@@ -45,6 +45,7 @@ async function getHomes(query) {
         if(query.userId)
             options.userId = query.userId
 
+
         const homes = await Model.find(options)
             .skip(page * limit)
             .limit(limit)

@@ -21,7 +21,7 @@ async function auth(request, response, next) {
     
         request.userId = session.userId.toString()
 
-        if(!session.user.role !== 'admin') {
+        if(session.user.role != 'admin') {
             delete request.query.userId
             delete request.query.all
         }
