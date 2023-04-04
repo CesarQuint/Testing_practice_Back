@@ -9,6 +9,13 @@ module.exports = class Messages {
             $details
         }
 
+        this.homeAlreadyExist = {
+            code: 503,
+            key: 'homeAlreadyExist',
+            message: $message || 'Error al guardar la información  de la casa este usuario ya tiene una casa asignada',
+            $details
+        }
+
         this.homeGetError = {
             code: 503,
             key: 'homeGetError',

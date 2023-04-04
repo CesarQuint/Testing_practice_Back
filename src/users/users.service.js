@@ -65,6 +65,14 @@ async function getUsers(query) {
             .skip(page * limit)
             .limit(limit)
             .sort({created: -1})
+            .populate({
+                path: 'home',
+                select: {
+                    street: true,
+                    extnumber: true,
+                    intnumber: true
+                }
+            })
 
         const total = await Model.countDocuments(options)
 
@@ -82,6 +90,7 @@ async function getUser(userId) {
     try {
 
         const user = await Model.findOne({_id: userId})
+            .populate('home')
 
         if(!user)
             throw new Messages(userId).userNotFound
