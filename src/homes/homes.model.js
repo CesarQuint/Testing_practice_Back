@@ -18,7 +18,7 @@ const schema = new Schema({
         type: String
     },
 
-    exnumber: {
+    extnumber: {
         type: String
     },
 
