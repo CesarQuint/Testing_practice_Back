@@ -35,19 +35,11 @@ const schema = new Schema({
     created: {
         type: Date,
         default: Date.now
-    }, 
-    home: {
-        type: ObjectId,
-        ref: 'Homes',
-    },
+    }
 
-    homeId: {
-        type: ObjectId,
-    },
 })
 
 schema.pre('save', function(next) {
-    this.home = this.homeId
     this.updated = new Date()
     if(this.password)
         this.password = Methods.bcryptHash(this.password)

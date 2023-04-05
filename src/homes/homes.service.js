@@ -9,6 +9,7 @@ module.exports = {
     getHomes,
     getHomeUser,
     getHome,
+    updateHomeUser,
     updateHome,
     deleteHome,
     Model,
@@ -50,7 +51,7 @@ async function getHomes(query) {
         if(query.find) {
             const regexp = new RegExp(query.find, 'i')
             options.$or = [
-                {name: regexp}
+                {address: regexp}
             ]
         }
 
@@ -99,8 +100,8 @@ async function getHome(homeId) {
 
 async function getHomeUser(userId) {
     try {
-        console.log(userId)
-        const home = await Model.find({userId: userId})
+
+        const home = await Model.findOne({ userId })
 
         if(!home)
             throw new Messages(userId).homeNotFound
@@ -115,14 +116,6 @@ async function getHomeUser(userId) {
 async function updateHome(homeId, data) {
     try {
 
-        if(data.userId) {
-            
-            const exhome = await Model.findOne({userId:data.userId})
-    
-            if(exhome)
-                throw new Messages().homeAlreadyExist         
-        }
-        
         const home = await getHome(homeId)
         const keys = Object.keys(data)
 
@@ -131,6 +124,37 @@ async function updateHome(homeId, data) {
         })
 
         await home.save()
+
+        return getHome(homeId)
+
+    } catch(error) {
+        throw error
+    }
+}
+
+async function updateHomeUser(homeId, data) {
+    try {
+
+        const home = await getHome(homeId)
+        const keys = Object.keys(data)
+        let user = null
+
+        if(home.userId)
+            user = await Services.Users.getUser(home.userId)
+
+        keys.forEach(key => {
+            home[key] = data[key]
+        })
+
+        await home.save()
+
+        if(user)
+            await Services.Users.updateUser(user._id,{ homeId : null}) 
+        
+        await Services.Users.updateUser(data.userId,{ homeId: home._id})
+
+        if(user && user.homeId)
+            await updateHome(user.homeId, { userId: null })
 
         return getHome(homeId)
 

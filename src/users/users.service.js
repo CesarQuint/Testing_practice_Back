@@ -38,12 +38,7 @@ async function createUser(data) {
     try {
 
         const user = new Model(data)
-        /**
-            const home = await Services.Homes.createHome({userId: user._id})
-
-            user.homeId = home._id
-
-        */
+       
         await user.save()
 
         return await getUser(user._id)

@@ -47,6 +47,7 @@ module.exports = class Fields {
             name: 'numero interior',
             prop: 'intnumber',
             value: this.props.intnumber,
+            required: false
         })
 
 
@@ -63,6 +64,7 @@ module.exports = class Fields {
             name: 'seccion',
             prop: 'section',
             value: this.props.section,
+            required: false
         })       
     }
 }

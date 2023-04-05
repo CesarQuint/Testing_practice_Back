@@ -34,6 +34,10 @@ const schema = new Schema({
         type: String
     },
 
+    address: {
+        type: String
+    },
+
     updated: {
         type: Date
     },
@@ -46,6 +50,7 @@ const schema = new Schema({
 
 schema.pre('save', function(next) {
     this.user = this.userId
+    this.address = `Calle: ${this.street} Numero Exterior: ${this.extnumber} Numero Interior: ${this.intnumber || ''} Colonia: ${this.colony} Seccion ${this.section || ''}`
     next()
 })
 

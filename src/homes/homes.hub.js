@@ -6,6 +6,7 @@ module.exports = {
     getHomes,
     getHomeUser,
     getHome,
+    updateHomeUser,
     updateHome,
     deleteHome
 }
@@ -93,7 +94,6 @@ async function updateHome(request, response) {
         }
 
         const props = [
-            'userId',
             'street',
             'extnumber',
             'intnumber',
@@ -104,6 +104,28 @@ async function updateHome(request, response) {
         props.forEach(prop => request.body[prop] != undefined && (data[prop] = fields[prop].get()))
 
         response.__data(await Service.updateHome(data.homeId, data))
+
+    } catch(error) {
+        response.__error(error)
+    }
+}
+
+async function updateHomeUser(request, response) {
+    try {
+
+        const fields = new Fields(request)
+
+        let data = {
+            homeId: fields.homeId.get()
+        }
+
+        const props = [
+            'userId'
+        ]
+
+        props.forEach(prop => request.body[prop] != undefined && (data[prop] = fields[prop].get()))
+
+        response.__data(await Service.updateHomeUser(data.homeId, data))
 
     } catch(error) {
         response.__error(error)
