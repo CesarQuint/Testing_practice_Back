@@ -30,8 +30,6 @@ async function createHome(data) {
         
         const home = new Model(data)
 
-        await Services.Users.updateUser(data.userId,{ homeId: home._id})
-
         await home.save()
 
         return getHome(home._id)
