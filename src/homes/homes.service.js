@@ -7,6 +7,7 @@ const Utils = require('../utils')
 module.exports = {
     createHome,
     getHomes,
+    getHomeUser,
     getHome,
     updateHome,
     deleteHome,
@@ -17,7 +18,18 @@ module.exports = {
 async function createHome(data) {
     try {
         
+        if(data.userId) {
+            
+            const exhome = await Model.findOne({userId:data.userId})
+    
+            if(exhome)
+                throw new Messages().homeAlreadyExist         
+        }
+     
+        
         const home = new Model(data)
+
+        await Services.Users.updateUser(data.userId,{ homeId: home._id})
 
         await home.save()
 
@@ -85,9 +97,32 @@ async function getHome(homeId) {
     }
 }
 
+async function getHomeUser(userId) {
+    try {
+        console.log(userId)
+        const home = await Model.find({userId: userId})
+
+        if(!home)
+            throw new Messages(userId).homeNotFound
+
+        return home
+
+    } catch(error) {
+        throw error
+    }
+}
+
 async function updateHome(homeId, data) {
     try {
 
+        if(data.userId) {
+            
+            const exhome = await Model.findOne({userId:data.userId})
+    
+            if(exhome)
+                throw new Messages().homeAlreadyExist         
+        }
+        
         const home = await getHome(homeId)
         const keys = Object.keys(data)
 

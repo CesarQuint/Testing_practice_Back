@@ -36,5 +36,12 @@ module.exports = class Messages {
             message: $message || 'Error al borrar la información  de la casa',
             $details
         }
+
+        this.homeAlreadyExist = {
+            code: 503,
+            key: 'homeAlreadyExist',
+            message: $message || 'Error al guardar la información  de la casa este usuario ya tiene una casa asignada',
+            $details
+        }
     }
 }
