@@ -4,9 +4,7 @@ const Service = require('./homes.service')
 module.exports = {
     createHome,
     getHomes,
-    getHomeUser,
     getHome,
-    updateHomeUser,
     updateHome,
     deleteHome
 }
@@ -68,21 +66,6 @@ async function getHome(request, response) {
     }
 }
 
-async function getHomeUser(request, response) {
-    try {
-
-        const fields = new Fields(request)
-
-        const data = {
-            userId: fields.userId.get()
-        }
-
-        response.__data(await Service.getHomeUser(data.userId))
-
-    } catch(error) {
-        response.__error(error)
-    }
-}
 
 async function updateHome(request, response) {
     try {
@@ -99,33 +82,12 @@ async function updateHome(request, response) {
             'intnumber',
             'colony',
             'section',
-        ]
-
-        props.forEach(prop => request.body[prop] != undefined && (data[prop] = fields[prop].get()))
-
-        response.__data(await Service.updateHome(data.homeId, data))
-
-    } catch(error) {
-        response.__error(error)
-    }
-}
-
-async function updateHomeUser(request, response) {
-    try {
-
-        const fields = new Fields(request)
-
-        let data = {
-            homeId: fields.homeId.get()
-        }
-
-        const props = [
             'userId'
         ]
 
         props.forEach(prop => request.body[prop] != undefined && (data[prop] = fields[prop].get()))
 
-        response.__data(await Service.updateHomeUser(data.homeId, data))
+        response.__data(await Service.updateHome(data.homeId, data))
 
     } catch(error) {
         response.__error(error)
