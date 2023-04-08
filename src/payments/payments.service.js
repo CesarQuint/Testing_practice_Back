@@ -50,9 +50,7 @@ async function getPayments(query) {
             .populate({
                 path: 'home',
                 select: {
-                    street: true,
-                    extnumber: true,
-                    intnumber: true
+                    address : true
                 }
             })
         

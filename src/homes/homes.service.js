@@ -100,56 +100,13 @@ async function updateHome(homeId, data) {
         const home = await getHome(homeId)
         const keys = Object.keys(data)
 
-        if(home.userId || home.userId == null)
-        {
-            const oldHome = await Model.findOne({ userId : data.userId })
-
-            console.log(home)
-            console.log(oldHome)
-
-            if(oldHome){
-                oldHome.userId = null
-                oldHome.user = null
-                await oldHome.save()
-            }   
-        }
 
         keys.forEach(key => {
             home[key] = data[key]
         })
-
-        await home.save()
-
-        return getHome(homeId)
-
-    } catch(error) {
-        throw error
-    }
-}
-
-async function updateHomeUser(homeId, data) {
-    try {
-
-        const home = await getHome(homeId)
-        const keys = Object.keys(data)
-        let user = null
-
-        if(home.userId)
-            user = await Services.Users.getUser(home.userId)
-
-        keys.forEach(key => {
-            home[key] = data[key]
-        })
-
-        await home.save()
-
-        if(user)
-            await Services.Users.updateUser(user._id,{ homeId : null}) 
         
-        await Services.Users.updateUser(data.userId,{ homeId: home._id})
-
-        if(user && user.homeId)
-            await updateHome(user.homeId, { userId: null })
+        await Model.updateMany({userId: home.userId}, {$set: {userId: null, user: null}})
+        await home.save()
 
         return getHome(homeId)
 
@@ -157,6 +114,7 @@ async function updateHomeUser(homeId, data) {
         throw error
     }
 }
+
 
 async function deleteHome(homeId) {
     try {
