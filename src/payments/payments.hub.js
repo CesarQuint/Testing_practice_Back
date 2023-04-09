@@ -19,7 +19,7 @@ async function createPayment(request,response) {
             reference: fields.reference.get(),
             paymentphoto: fields.paymentphoto.get(),
             amount: fields.amount.get(),
-            status:'pending..'
+            status:'Pendiente..'
         }
 
         response.__data(await Service.createPayment(data))
@@ -75,7 +75,9 @@ async function updatePayment(request,response) {
         }
 
         const props = [
+            'homeId',
             'concept',
+            'reference',
             'paymentphoto',
             'amount',
             'status'
