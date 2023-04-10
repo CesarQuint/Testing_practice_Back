@@ -2,14 +2,14 @@ const Router = require('express').Router()
 const Hub = require('./tickets.hub')
 const Middlewares = require('../middlewares')
 
-Router.post('/ticket', Middlewares.auth, Hub.createTicket)
+Router.post('/tickets', Middlewares.auth, Hub.createTicket)
 
-Router.get('/ticket/:ticketId', Middlewares.auth, Hub.getTicket)
+Router.get('/tickets/:ticketId', Middlewares.auth, Hub.getTicket)
 
-Router.get('/ticket', Middlewares.auth, Hub.getTickets)
+Router.get('/tickets', Middlewares.auth, Hub.getTickets)
 
-Router.put('/ticket/:ticketId', Middlewares.auth, Hub.updateTicket)
+Router.put('/tickets/:ticketId', Middlewares.auth, Hub.updateTicket)
 
-Router.delete('/ticket/:ticketId', Middlewares.auth, Hub.deleteTicket)
+Router.delete('/tickets/:ticketId', Middlewares.auth, Hub.deleteTicket)
 
 module.exports = Router

@@ -47,12 +47,7 @@ async function getTickets(query) {
             .skip(page*limit)
             .limit(limit)
             .sort({created: -1})
-            .populate({
-                path: 'home',
-                select: {
-                    address : true
-                }
-            })
+           
         
         const total = await Model.countDocuments(options)
 
@@ -69,7 +64,7 @@ async function getTicket(ticketId) {
     try {
 
         const ticket = await Model.findOne({_id: ticketId})
-            .populate('home')
+
 
         if(!ticket)
             throw new Messages(ticketId).ticketNotFound

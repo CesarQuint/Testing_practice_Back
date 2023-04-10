@@ -5,19 +5,12 @@ module.exports = class Fields {
     constructor(request){
 
         this.props = {
-            userId: request.userId,
             ...request.headers,
             ...request.params,
             ...request.query,
             ...request.body,
         }
 
-        this.userId = new Validator({
-            type: 'objectId',
-            name: 'identificador del usuario',
-            prop: 'userId',
-            value: this.props.userId,
-        })
         
         this.notificationId = new Validator({
             type: 'objectId',

@@ -218,10 +218,10 @@ module.exports = class Validation {
 
             case 'date':
 
-                if(!Moment.isDate(new Date(value)))
+                if(!Moment.isDate(new Date(this.value)))
                     throw this.error('se espera una fecha')
 
-                this.value = new Date(value)
+                this.value = new Date(this.value)
                 break
 
             case 'file':

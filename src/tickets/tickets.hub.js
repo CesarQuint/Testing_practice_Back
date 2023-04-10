@@ -14,14 +14,13 @@ async function createTicket(request,response) {
 
         const fields = new Fields(request)
         const data = {
-            homes: fields.homes.get(),
             concept: fields.concept.get(),
             amount: fields.amount.get(),
             type: fields.type.get(),
             limited: fields.limited.get()
         }
 
-        response.__data(await Service.createticket(data))
+        response.__data(await Service.createTicket(data))
 
     } catch(error) {
         response.__error(error)
@@ -41,7 +40,7 @@ async function getTickets(request,response) {
         if(query.all)
             delete query.homeId
 
-        response.__data(await Service.gettickets(query))
+        response.__data(await Service.getTickets(query))
 
     } catch (error) {
         response.__error(error)
@@ -57,7 +56,7 @@ async function getTicket(request,response) {
             ticketId:fields.ticketId.get()
         }
 
-        response.__data(await Service.getticket(data.ticketId))
+        response.__data(await Service.getTicket(data.ticketId))
 
     } catch (error) {
         response.__error(error)
@@ -83,7 +82,7 @@ async function updateTicket(request,response) {
 
         props.forEach(prop => request.body[prop] != undefined && (data[prop] = fields[prop].get()))
 
-        response.__data(await Service.updateticket(data.ticketId,data))
+        response.__data(await Service.updateTicket(data.ticketId,data))
 
     } catch (error) {
         response.__error(error)
@@ -99,7 +98,7 @@ async function deleteTicket(request,response) {
             ticketId: fields.ticketId.get()
         }
 
-        response.__data(await Service.deleteticket(data.ticketId))
+        response.__data(await Service.deleteTicket(data.ticketId))
 
     } catch(error) {
         response.__error(error)
