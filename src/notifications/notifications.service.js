@@ -50,12 +50,6 @@ async function getNotifications(query) {
             .skip(page*limit)
             .limit(limit)
             .sort({created: -1})
-            .populate({
-                path: 'user',
-                select: {
-                    name: true
-                }
-            })
         
         const total = await Model.countDocuments(options)
 
@@ -72,7 +66,6 @@ async function getNotification(notificationId) {
     try {
 
         const notification = await Model.findOne({_id: notificationId})
-            .populate('user')
 
         if(!notification)
             throw new Messages(notificationId).notificationNotFound

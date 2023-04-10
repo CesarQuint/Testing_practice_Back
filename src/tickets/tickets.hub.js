@@ -14,10 +14,11 @@ async function createTicket(request,response) {
 
         const fields = new Fields(request)
         const data = {
-            homeId: fields.homeId.get(),
+            homes: fields.homes.get(),
             concept: fields.concept.get(),
             amount: fields.amount.get(),
-            relevance: fields.relevance.get()
+            type: fields.type.get(),
+            limited: fields.limited.get()
         }
 
         response.__data(await Service.createticket(data))
@@ -75,7 +76,9 @@ async function updateTicket(request,response) {
         const props = [
             'concept',
             'amount',
-            'relevance'
+            'type',
+            'homes',
+            'limited'
         ]
 
         props.forEach(prop => request.body[prop] != undefined && (data[prop] = fields[prop].get()))

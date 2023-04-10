@@ -14,11 +14,9 @@ async function createNotification(request,response) {
 
         const fields = new Fields(request)
         const data = {
-            userId: fields.userId.get(),
             title: fields.title.get(),
             description: fields.description.get(),
-            relevance: fields.relevance.get(),
-            type: fields.type.get(),
+            relevance: fields.relevance.get()
         }
 
         response.__data(await Service.createNotification(data))
@@ -73,11 +71,9 @@ async function updateNotification(request,response) {
         }
 
         const props = [
-            'userId',
             'title',
             'description',
-            'relevance',
-            'type'
+            'relevance'
         ]
 
         props.forEach(prop => request.body[prop] != undefined && (data[prop] = fields[prop].get()))

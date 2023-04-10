@@ -1,5 +1,5 @@
 const Router = require('express').Router()
-const Hub = require('./ticket.hub')
+const Hub = require('./tickets.hub')
 const Middlewares = require('../middlewares')
 
 Router.post('/ticket', Middlewares.auth, Hub.createTicket)

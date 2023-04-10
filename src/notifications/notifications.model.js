@@ -13,10 +13,6 @@ const schema = new Schema({
         type: String
     },
 
-    type: {
-        type: String
-    },
-
     relevance: {
         type: String
     },
@@ -29,19 +25,9 @@ const schema = new Schema({
         type: Date,
         default: Date.now
     },
-
-    user: {
-        type: ObjectId,
-        ref: 'Users',
-    },
-
-    userId: {
-        type: ObjectId,
-    }
 })
 
 schema.pre('save', function(next) {
-    this.user = this.userId
     next()
 })
 

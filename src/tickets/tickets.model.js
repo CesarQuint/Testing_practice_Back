@@ -4,16 +4,7 @@ const ObjectId = require('mongoose').Types.ObjectId
 const Messages = require('./tickets.messages')
 
 const schema = new Schema({
-    
-    home: {
-        type: ObjectId,
-        ref: 'Homes',
-    },
-
-    homeId: {
-        type: ObjectId,
-    },
-
+  
     concept: {
         type: String,
     },
@@ -22,10 +13,17 @@ const schema = new Schema({
         type:Number,
     },
 
-    relevance: {
-        type: String,
+    type: {
+        type: String, 
     },
 
+    homes: {
+        type: [ObjectId],
+    },
+
+    limited: {
+        type: Date
+    },
 
     updated: {
         type: Date
@@ -38,7 +36,6 @@ const schema = new Schema({
 })
 
 schema.pre('save', function(next) {
-    this.home = this.homeId
     next()
 })
 
@@ -62,4 +59,4 @@ schema.post('find', function(err, doc, next) {
     next()
 })
 
-module.exports = Model('payments', schema)
+module.exports = Model('tickets', schema)

@@ -46,12 +46,5 @@ module.exports = class Fields {
             prop: 'relevance',
             value: this.props.relevance,
         })
-                
-        this.type = new Validator({
-            type: 'string',
-            name: 'tipo',
-            prop: 'type',
-            value: this.props.type,
-        })
     }
 }
