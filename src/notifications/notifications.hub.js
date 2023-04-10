@@ -36,7 +36,7 @@ async function getNotifications(request,response) {
             page: parseInt(request.query.page || 0),
             find: request.query.find,
             all: request.query.all,
-            type: request.request.query
+            type: request.query.type
         }
 
         if(query.all)
