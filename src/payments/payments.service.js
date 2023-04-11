@@ -14,8 +14,12 @@ module.exports = {
 
 async function createPayment(data) {
     try {
+        
 
         const payment = new Model(data)
+
+        if(data.voucher)
+            payment.voucher = await Services.Buckets.uploadFile(data.voucher)
 
         await  payment.save()
 

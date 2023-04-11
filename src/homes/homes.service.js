@@ -7,6 +7,7 @@ const Utils = require('../utils')
 module.exports = {
     createHome,
     getHomes,
+    getHomeUser,
     getHome,
     updateHome,
     deleteHome,
@@ -86,6 +87,22 @@ async function getHome(homeId) {
 
         if(!home)
             throw new Messages(homeId).homeNotFound
+
+        return home
+
+    } catch(error) {
+        throw error
+    }
+}
+
+async function getHomeUser(userId) {
+    try {
+
+        const home = await Model.findOne({userId})
+            .populate('user')
+
+        if(!home)
+            throw new Messages(userId).homeNotFound
 
         return home
 

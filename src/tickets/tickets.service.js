@@ -97,7 +97,7 @@ async function updateTicket(ticketId,data) {
 async function deleteTicket(ticketId) {
     try {
 
-        await getticket(ticketId)
+        await getTicket(ticketId)
         await Model.deleteOne({_id: ticketId})
 
         return ticketId

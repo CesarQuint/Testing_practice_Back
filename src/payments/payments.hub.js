@@ -17,9 +17,8 @@ async function createPayment(request,response) {
             homeId: fields.homeId.get(),
             concept: fields.concept.get(),
             reference: fields.reference.get(),
-            paymentphoto: fields.paymentphoto.get(),
+            vaucher: fields.vaucher.get(),
             amount: fields.amount.get(),
-            status:'Pendiente..'
         }
 
         response.__data(await Service.createPayment(data))

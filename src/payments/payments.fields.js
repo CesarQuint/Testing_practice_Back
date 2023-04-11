@@ -40,12 +40,13 @@ module.exports = class Fields {
             value: this.props.reference,
         })
         
-        this.paymentphoto = new Validator({
-            type: 'string',
-            name: 'foto de pago',
-            prop: 'paymentphoto',
-            value: this.props.paymentphoto,
-        })
+        this.voucher = new Validator({
+            type: 'file',
+            name: 'comprobante de pago',
+            prop: 'voucher',
+            value: this.props.voucher,
+            required: false
+        })
         
         this.amount = new Validator({
             type: 'float',

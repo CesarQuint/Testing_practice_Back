@@ -6,6 +6,8 @@ Router.post('/homes', Middlewares.auth, Hub.createHome)
 
 Router.get('/homes/:homeId', Middlewares.auth, Hub.getHome)
 
+Router.get('/homes/:userId/user', Middlewares.auth, Hub.getHomeUser)
+
 Router.get('/homes', Middlewares.auth, Hub.getHomes)
 
 Router.put('/homes/:homeId', Middlewares.auth, Hub.updateHome)

@@ -4,6 +4,7 @@ const Service = require('./homes.service')
 module.exports = {
     createHome,
     getHomes,
+    getHomeUser,
     getHome,
     updateHome,
     deleteHome
@@ -60,6 +61,22 @@ async function getHome(request, response) {
         }
 
         response.__data(await Service.getHome(data.homeId))
+
+    } catch(error) {
+        response.__error(error)
+    }
+}
+
+async function getHomeUser(request, response) {
+    try {
+
+        const fields = new Fields(request)
+
+        const data = {
+            userId: fields.userId.get()
+        }
+
+        response.__data(await Service.getHomeUser(data.userId))
 
     } catch(error) {
         response.__error(error)

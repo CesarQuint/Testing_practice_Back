@@ -26,12 +26,13 @@ const schema = new Schema({
         type:Number,
     },
     
-    paymentphoto: {
+    voucher: {
         type: String,
     },
 
     status: {
         type: String,
+        default: 'pending'
     },
 
     updated: {
