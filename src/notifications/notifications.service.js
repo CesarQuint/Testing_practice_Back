@@ -40,9 +40,6 @@ async function getNotifications(query) {
             ]
         }
 
-        if(query.userId)
-            options.userId = query.userId
-
         if(query.type)
             options.type = query.type
 

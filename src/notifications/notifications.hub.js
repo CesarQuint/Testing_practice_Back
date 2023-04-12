@@ -30,7 +30,6 @@ async function getNotifications(request,response) {
     try {
 
         const query = {
-            userId: request.query.userId || request.userId,
             page: parseInt(request.query.page || 0),
             find: request.query.find,
             all: request.query.all,

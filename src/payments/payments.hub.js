@@ -17,7 +17,7 @@ async function createPayment(request,response) {
             homeId: fields.homeId.get(),
             concept: fields.concept.get(),
             reference: fields.reference.get(),
-            vaucher: fields.vaucher.get(),
+            voucher: fields.voucher.get(),
             amount: fields.amount.get(),
         }
 

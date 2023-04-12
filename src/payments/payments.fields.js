@@ -46,7 +46,7 @@ module.exports = class Fields {
             prop: 'voucher',
             value: this.props.voucher,
             required: false
-        })
+        })
         
         this.amount = new Validator({
             type: 'float',
