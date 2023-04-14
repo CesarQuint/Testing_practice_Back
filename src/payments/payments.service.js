@@ -1,5 +1,6 @@
 const Model = require('./payments.model')
 const Messages = require('./payments.messages')
+const Services = require('../services')
 const Utils = require('../utils')
 
 module.exports = {
@@ -17,12 +18,12 @@ async function createPayment(data) {
         
 
         const payment = new Model(data)
+        console.log(data);
 
         if(data.voucher)
             payment.voucher = await Services.Buckets.uploadFile(data.voucher)
 
         await  payment.save()
-
         return getPayment(payment._id)
 
     } catch (error) {

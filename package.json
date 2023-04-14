@@ -11,6 +11,7 @@
   "author": "Ivan Bravo Mendoza @IvanBM1",
   "license": "ISC",
   "dependencies": {
+    "@google-cloud/storage": "^6.9.5",
     "@sendgrid/mail": "^7.7.0",
     "bcrypt": "^5.0.1",
     "colors": "^1.4.0",

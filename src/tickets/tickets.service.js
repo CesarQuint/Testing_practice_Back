@@ -41,7 +41,7 @@ async function getTickets(query) {
         }
 
         if(query.homeId)
-            options.homeId = query.homeId
+            options.homes = []
 
         const tickets = await Model.find(options)
             .skip(page*limit)

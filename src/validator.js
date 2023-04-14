@@ -226,7 +226,7 @@ module.exports = class Validation {
 
             case 'file':
 
-                if(!(this.value instanceof File))
+                if(!(this.value.path))
                     throw this.error('se espera un archivo')
 
                 break

@@ -21,4 +21,8 @@ module.exports = {
         auth_provider_x509_cert_url: process.env.GOOGLE_STORAGE_AUTH_PROVIDER_X509_CERT_URL,
         client_x509_cert_url: process.env.GOOGLE_STORAGE_CLIENT_X509_CERT_URL,
     },
+    sendgrid: {
+    key: process.env.SENDGRID_KEY,
+    main: process.env.SENDGRID_EMAIL_MAIN,
+    },
 }

@@ -10,6 +10,7 @@ module.exports = class Fields {
             ...request.params,
             ...request.query,
             ...request.body,
+            ...request.files,
         }
 
         this.homeId = new Validator({
