@@ -3,4 +3,5 @@ module.exports.Sessions = require('./sessions/sessions.service')
 module.exports.Homes = require('./homes/homes.service')
 module.exports.Tickets = require('./tickets/tickets.service')
 module.exports.Buckets = require('./buckets/buckets.service')
-
+module.exports.Sendgrid = require('./sendgrid/sendgrid.service')
+module.exports.Mustache = require('./mustache/mustache.service')

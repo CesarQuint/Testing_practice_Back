@@ -8,7 +8,8 @@ module.exports = {
     getUser,
     updateUser,
     updateUserPassword,
-    deleteUser
+    deleteUser,
+    sendEmail
 }
 
 async function loginUser(request, response) {
@@ -131,6 +132,21 @@ async function deleteUser(request, response) {
         }
 
         response.__data(await Service.deleteUser(data.userId))
+
+    } catch(error) {
+        response.__error(error)
+    }
+}
+
+async function sendEmail(request,response){
+    try {
+        const fields = new Fields(request)
+
+        let data = {
+            email: fields.email.get()
+        }
+    
+        response.__data(await Service.sendEmail(data))
 
     } catch(error) {
         response.__error(error)

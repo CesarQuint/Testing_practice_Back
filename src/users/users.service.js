@@ -12,6 +12,7 @@ module.exports = {
     updateUser,
     updateUserPassword,
     deleteUser,
+    sendEmail,
     Model,
     Messages
 }
@@ -143,6 +144,27 @@ async function deleteUser(userId) {
         return userId
 
     } catch(error) {
+        throw error
+    }
+}
+
+async function sendEmail(data) {
+    try {
+
+        const user = await Model.findOne({email:data.email})
+
+        if(!user)
+            throw new Messages(data.email).userNotFound
+
+        await Services.Sendgrid.sendView('test',{
+            email: 'cesarquinttl@gmail.com',
+            subject: 'Test',
+            name: 'Cesar',
+            token: Methods.cryptoHash(12)
+        })
+        
+        
+    } catch (error) {
         throw error
     }
 }
