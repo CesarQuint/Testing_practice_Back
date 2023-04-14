@@ -9,7 +9,9 @@ module.exports = {
     updateUser,
     updateUserPassword,
     deleteUser,
-    sendEmail
+    sendEmail,
+    validateToken,
+    resetPassword
 }
 
 async function loginUser(request, response) {
@@ -139,6 +141,34 @@ async function deleteUser(request, response) {
 }
 
 async function sendEmail(request,response){
+    try {
+        const fields = new Fields(request)
+
+        let data = {
+            email: fields.email.get()
+        }
+    
+        response.__data(await Service.sendEmail(data))
+
+    } catch(error) {
+        response.__error(error)
+    }
+}
+
+async function validateToken(request,response){
+    try {
+        const fields = new Fields(request)
+
+        token = fields.token.get()
+    
+        console.log(token);
+        // response.__data(await Service.sendEmail(data))
+
+    } catch(error) {
+        response.__error(error)
+    }
+}
+async function resetPassword(request,response){
     try {
         const fields = new Fields(request)
 

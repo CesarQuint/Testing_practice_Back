@@ -153,14 +153,18 @@ async function sendEmail(data) {
 
         const user = await Model.findOne({email:data.email})
 
+        const token = Methods.cryptoHash(12)
+
         if(!user)
             throw new Messages(data.email).userNotFound
+        
+        await updateUser(user.data._id,{token})
 
         await Services.Sendgrid.sendView('test',{
             email: 'cesarquinttl@gmail.com',
             subject: 'Test',
             name: 'Cesar',
-            token: Methods.cryptoHash(12)
+            token
         })
         
         
