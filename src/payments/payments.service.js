@@ -15,7 +15,6 @@ module.exports = {
 
 async function createPayment(data) {
     try {
-        
 
         const payment = new Model(data)
         console.log(data);
@@ -23,7 +22,9 @@ async function createPayment(data) {
         if(data.voucher)
             payment.voucher = await Services.Buckets.uploadFile(data.voucher)
 
-        await  payment.save()
+        await payment.save()
+        console.log(data);
+        await Services.Tickets.updateTicket(data.ticketId,{homes:[data.homeId]})
 
         await Services.Sendgrid.sendView('test',{
             email: 'cesarquinttl@gmail.com',

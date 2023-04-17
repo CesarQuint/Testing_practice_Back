@@ -19,6 +19,7 @@ async function createPayment(request,response) {
             reference: fields.reference.get(),
             voucher: fields.voucher.get(),
             amount: fields.amount.get(),
+            ticketId:request.body.ticketId
         }
         
 

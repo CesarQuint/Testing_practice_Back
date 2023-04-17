@@ -158,7 +158,7 @@ async function sendEmail(data) {
         if(!user)
             throw new Messages(data.email).userNotFound
         
-        await updateUser(user.data._id,{token})
+        await updateUser(user._id,{token})
 
         await Services.Sendgrid.sendView('test',{
             email: 'cesarquinttl@gmail.com',

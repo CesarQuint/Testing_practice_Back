@@ -39,9 +39,9 @@ async function getTickets(query) {
                 {name:regexp}
             ]
         }
-
+    
         if(query.homeId)
-            options.homes = []
+            options.homes = {$nin:[query.homeId]}
 
         const tickets = await Model.find(options)
             .skip(page*limit)
@@ -84,6 +84,10 @@ async function updateTicket(ticketId,data) {
 
         keys.forEach(key => {
             ticket[key] = data[key]
+            if(ticket[key] == Array){
+                ticket[key] = [...ticket[key],data[key]]
+                return
+            } 
         })
 
         await ticket.save()
