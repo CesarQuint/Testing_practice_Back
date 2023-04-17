@@ -22,14 +22,8 @@ async function createPayment(data) {
             payment.voucher = await Services.Buckets.uploadFile(data.voucher)
 
         await payment.save()
-        await Services.Tickets.updateTicket(data.ticketId,{homes:[data.homeId]})
-
-        await Services.Sendgrid.sendView('test',{
-            email: 'cesarquinttl@gmail.com',
-            subject: 'Test',
-            name: 'Cesar',
-        })
-
+        await Services.Tickets.updateTicketHome(data.ticketId,data.homeId)
+        
         return getPayment(payment._id)
 
     } catch (error) {

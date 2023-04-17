@@ -8,6 +8,7 @@ module.exports = {
     getTicket,
     updateTicket,
     deleteTicket,
+    updateTicketHome,
     Model,
     Messages
 }
@@ -36,7 +37,7 @@ async function getTickets(query) {
         if(query.find) {
             const regexp = new RegExp(query.find,'i')
             options.$or = [
-                {name:regexp}
+                {concept:regexp}
             ]
         }
     
@@ -46,7 +47,7 @@ async function getTickets(query) {
         const tickets = await Model.find(options)
             .skip(page*limit)
             .limit(limit)
-            .sort({created: -1})
+            .sort({limited: 1})
            
         
         const total = await Model.countDocuments(options)
@@ -83,14 +84,27 @@ async function updateTicket(ticketId,data) {
         const keys = Object.keys(data)
 
         keys.forEach(key => {
-            ticket[key] = data[key]
-            if(ticket[key] == Array){
-                ticket[key] = [...ticket[key],data[key]]
-                return
-            } 
+            ticket[key] = data[key] 
         })
 
         await ticket.save()
+        return getTicket(ticket._id)
+
+    } catch(error) {
+        throw error
+    }
+}
+
+async function updateTicketHome(ticketId, homeId) {
+    try {
+
+        const ticket = await getTicket(ticketId)
+        
+        if(!ticket.homes.includes(homeId))
+            ticket.homes.push(homeId)
+
+        await ticket.save()
+        
         return getTicket(ticket._id)
 
     } catch(error) {
