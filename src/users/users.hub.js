@@ -10,7 +10,6 @@ module.exports = {
     updateUserPassword,
     deleteUser,
     sendEmail,
-    validateToken,
     resetPassword
 }
 
@@ -155,28 +154,16 @@ async function sendEmail(request,response){
     }
 }
 
-async function validateToken(request,response){
-    try {
-        const fields = new Fields(request)
-
-        token = fields.token.get()
-    
-        console.log(token);
-        // response.__data(await Service.sendEmail(data))
-
-    } catch(error) {
-        response.__error(error)
-    }
-}
 async function resetPassword(request,response){
     try {
         const fields = new Fields(request)
 
         let data = {
-            email: fields.email.get()
+            password: fields.password.get(),
+            token: fields.token.get()
         }
     
-        response.__data(await Service.sendEmail(data))
+        response.__data(await Service.resetPassword(data))
 
     } catch(error) {
         response.__error(error)

@@ -13,6 +13,7 @@ module.exports = {
     updateUserPassword,
     deleteUser,
     sendEmail,
+    resetPassword,
     Model,
     Messages
 }
@@ -119,9 +120,6 @@ async function updateUserPassword(userId, data) {
 
         if(!user)
             throw new Messages(userId).userNotFound
-                
-        console.log(user);
-        console.log(Methods.bcryptHash(data.newPassword));
 
         if(!Methods.bcryptCompare(data.password, user.password))
             throw new Messages(data).userPasswordError
@@ -153,7 +151,7 @@ async function sendEmail(data) {
 
         const user = await Model.findOne({email:data.email})
 
-        const token = Methods.cryptoHash(12)
+        const token = Methods.cryptoHash(16)
 
         if(!user)
             throw new Messages(data.email).userNotFound
@@ -161,13 +159,30 @@ async function sendEmail(data) {
         await updateUser(user._id,{token})
 
         await Services.Sendgrid.sendView('test',{
-            email: 'cesarquinttl@gmail.com',
+            email: process.env.EMAIL_POST || data.email,
             subject: 'Test',
-            name: 'Cesar',
+            name: 'Usuario',
             token
         })
         
         
+    } catch (error) {
+        throw error
+    }
+}
+
+async function resetPassword(data) {
+    try {
+
+        const user = await Model.findOne({token:data.token})
+
+        if(!user)
+            throw new Messages(data.token).userNotFound
+        
+        await updateUser(user._id,{token:null,password:data.password})
+
+        return await user.save()
+
     } catch (error) {
         throw error
     }

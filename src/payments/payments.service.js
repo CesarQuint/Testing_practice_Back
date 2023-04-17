@@ -17,13 +17,11 @@ async function createPayment(data) {
     try {
 
         const payment = new Model(data)
-        console.log(data);
 
         if(data.voucher)
             payment.voucher = await Services.Buckets.uploadFile(data.voucher)
 
         await payment.save()
-        console.log(data);
         await Services.Tickets.updateTicket(data.ticketId,{homes:[data.homeId]})
 
         await Services.Sendgrid.sendView('test',{

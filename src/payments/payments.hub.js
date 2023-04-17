@@ -18,10 +18,11 @@ async function createPayment(request,response) {
             concept: fields.concept.get(),
             reference: fields.reference.get(),
             voucher: fields.voucher.get(),
-            amount: fields.amount.get(),
-            ticketId:request.body.ticketId
+            amount: fields.amount.get()
         }
-        
+
+        if(request.body.ticketId)
+            data.ticketId = request.body.ticketId
 
         response.__data(await Service.createPayment(data))
 

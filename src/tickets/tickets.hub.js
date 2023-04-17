@@ -36,7 +36,6 @@ async function getTickets(request,response) {
             find: request.query.find,
             all: request.query.all
         }
-        console.log(query);
 
         if(query.all)
             delete query.homeId
