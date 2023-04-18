@@ -3,6 +3,7 @@ const Service = require('./payments.service')
 
 module.exports = {
     createPayment,
+    createPaymentCard,
     getPayments,
     getPayment,
     updatePayment,
@@ -25,6 +26,23 @@ async function createPayment(request,response) {
             data.ticketId = request.body.ticketId
 
         response.__data(await Service.createPayment(data))
+
+    } catch(error) {
+        response.__error(error)
+    }
+}
+
+async function createPaymentCard(request,response) {
+    try {
+
+        const fields = new Fields(request)
+        const data = {
+            userId : request.userId,
+            homeId: fields.homeId.get(),
+            ticketId: fields.ticketId.get()
+        }
+
+        response.__data(await Service.createPaymentCard(data))
 
     } catch(error) {
         response.__error(error)

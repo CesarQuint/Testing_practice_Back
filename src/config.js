@@ -25,4 +25,8 @@ module.exports = {
     key: process.env.SENDGRID_KEY,
     main: process.env.SENDGRID_EMAIL_MAIN,
     },
+    stripe: {
+        secret: process.env.STRIPE_SECRET,
+        private: process.env.STRIPE_PRIVATE,
+    }
 }

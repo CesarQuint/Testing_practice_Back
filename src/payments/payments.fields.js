@@ -27,6 +27,13 @@ module.exports = class Fields {
             value: this.props.paymentId,
         })
 
+        this.ticketId = new Validator({
+            type: 'objectId',
+            name: 'identificador de ticket',
+            prop: 'ticketId',
+            value: this.props.ticketId
+        })
+
         this.concept = new Validator({
             type: 'string',
             name: 'concepto',

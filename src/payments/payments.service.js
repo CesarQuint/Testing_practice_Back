@@ -5,6 +5,7 @@ const Utils = require('../utils')
 
 module.exports = {
     createPayment,
+    createPaymentCard,
     getPayments,
     getPayment,
     updatePayment,
@@ -25,6 +26,27 @@ async function createPayment(data) {
         await Services.Tickets.updateTicketHome(data.ticketId,data.homeId)
         
         return getPayment(payment._id)
+
+    } catch (error) {
+        throw error
+    }
+}
+
+async function createPaymentCard(data) {
+    try {
+
+        const ticket = await Services.Tickets.getTicket(data.ticketId)
+        const user = await Services.Users.getUser(data.userId)
+
+        const checkoutData = {
+            email: user.email,
+            homeId: data.homeId,
+            ticketId: data.ticketId,
+            total: ticket.amount,
+            concept: ticket.concept
+        }
+
+        return await Services.Stripe.createCheckout(checkoutData)
 
     } catch (error) {
         throw error
