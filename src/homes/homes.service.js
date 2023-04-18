@@ -17,16 +17,16 @@ module.exports = {
 
 async function createHome(data) {
     try {
-        
+
         if(data.userId) {
-            
+
             const exhome = await Model.findOne({userId:data.userId})
-    
+
             if(exhome)
-                throw new Messages().homeAlreadyExist         
+                throw new Messages().homeAlreadyExist
         }
-     
-        
+
+
         const home = new Model(data)
 
         await home.save()
@@ -54,8 +54,7 @@ async function getHomes(query) {
 
         if(query.userId)
             options.userId = query.userId
-
-
+        console.log(options)
         const homes = await Model.find(options)
             .skip(page * limit)
             .limit(limit)
@@ -121,7 +120,7 @@ async function updateHome(homeId, data) {
         keys.forEach(key => {
             home[key] = data[key]
         })
-        
+
         await Model.updateMany({userId: home.userId}, {$set: {userId: null, user: null}})
         await home.save()
 

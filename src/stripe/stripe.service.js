@@ -40,6 +40,7 @@ async function webhook(data) {
         const ticket = await Services.Tickets.getTicket(ticketId)
         const paymentData = {
             homeId,
+            ticketId,
             concept: ticket.concept,
             reference: session.payment_intent,
             amount: ticket.amount,
@@ -47,6 +48,7 @@ async function webhook(data) {
         }
 
         await Services.Payments.createPayment(paymentData)
+
         return event
 
     } catch(error) {

@@ -22,8 +22,9 @@ async function createPayment(data) {
         if(data.voucher)
             payment.voucher = await Services.Buckets.uploadFile(data.voucher)
 
+        await Services.Tickets.updateTicketHome(data.ticketId, data.homeId)
+        
         await payment.save()
-        await Services.Tickets.updateTicketHome(data.ticketId,data.homeId)
         
         return getPayment(payment._id)
 

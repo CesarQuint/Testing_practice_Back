@@ -19,7 +19,11 @@ App.use(Cors())
 App.use(Compression())
 App.use(Morgan('dev'))
 App.use(Express.static('public'))
-App.use(Express.json())
+App.use(Express.json({
+    verify: function(req, res, buffer, encoding) {
+        req.rawBody = buffer.toString(encoding)
+    }
+}))
 App.use(FormData.parse({uploadDir: Path.join(__dirname, '/temp/'), autoClean: true}))
 
 App.use(Middlewares.responseType)
