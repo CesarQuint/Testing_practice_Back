@@ -32,6 +32,7 @@ const schema = new Schema({
 
     section: {
         type: String
+       
     },
 
     address: {
@@ -39,7 +40,8 @@ const schema = new Schema({
     },
 
     updated: {
-        type: Date
+        type: Date,
+        default: Date.now
     },
 
     created: {
@@ -50,7 +52,7 @@ const schema = new Schema({
 
 schema.pre('save', function(next) {
     this.user = this.userId
-    this.address = `Calle: ${this.street} Numero Exterior: ${this.extnumber} Numero Interior: ${this.intnumber || ''} Colonia: ${this.colony} Seccion ${this.section || ''}`
+    this.address = `Calle: ${this.street} Numero Exterior: ${this.extnumber} ${this.intnumber != null && this.intnumber != '' ? 'Numero Interior: '+ this.intnumber : ''} Colonia: ${this.colony} ${ this.section != null && this.section != '' ? 'Seccion: '+ this.section : ''}`
     next()
 })
 

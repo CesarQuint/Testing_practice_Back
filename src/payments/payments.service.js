@@ -81,8 +81,11 @@ async function getPayments(query) {
                     address : true
                 }
             })
+
+            
         
         const total = await Model.countDocuments(options)
+
 
         return{
             payments,

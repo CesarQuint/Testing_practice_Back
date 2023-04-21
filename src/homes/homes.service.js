@@ -55,6 +55,8 @@ async function getHomes(query) {
         if(query.userId)
             options.userId = query.userId
         console.log(options)
+
+        query.updated = true
         const homes = await Model.find(options)
             .skip(page * limit)
             .limit(limit)
@@ -65,6 +67,8 @@ async function getHomes(query) {
                     name: true,
                 }
             })
+
+        console.log(homes);
 
         const total = await Model.countDocuments(options)
 
@@ -115,14 +119,18 @@ async function updateHome(homeId, data) {
 
         const home = await getHome(homeId)
         const keys = Object.keys(data)
-
+        home.updated = Date.now()
+        
 
         keys.forEach(key => {
             home[key] = data[key]
         })
 
-        await Model.updateMany({userId: home.userId}, {$set: {userId: null, user: null}})
+        if(data.userId)
+            await Model.updateMany({userId: home.userId}, {$set: {userId: null, user: null}})
+        
         await home.save()
+       
 
         return getHome(homeId)
 
