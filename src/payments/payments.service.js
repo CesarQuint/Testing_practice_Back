@@ -25,6 +25,18 @@ async function createPayment(data) {
         await Services.Tickets.updateTicketHome(data.ticketId, data.homeId)
         
         await payment.save()
+
+        user = await Services.Users.getUser(data.userId)
+
+        await Services.Sendgrid.sendView('payment',{
+            email: [process.env.EMAIL_TEST,user.email] ,
+            emailPayment:user.email,
+            name: user.name,
+            subject: "Pago realizado",
+            concept: data.concept,
+            amount: data.amount,
+            url: data.url
+        })
         
         return getPayment(payment._id)
 
@@ -44,7 +56,8 @@ async function createPaymentCard(data) {
             homeId: data.homeId,
             ticketId: data.ticketId,
             total: ticket.amount,
-            concept: ticket.concept
+            concept: ticket.concept,
+            url:data.url
         }
 
         return await Services.Stripe.createCheckout(checkoutData)

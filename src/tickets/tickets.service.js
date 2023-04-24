@@ -1,6 +1,8 @@
 const Model = require('./tickets.model')
 const Messages = require('./tickets.messages')
 const Utils = require('../utils')
+const Services = require ('../services')
+const Config = require('../config')
 
 module.exports = {
     createTicket,
@@ -20,6 +22,18 @@ async function createTicket(data) {
 
         await  ticket.save()
 
+        let emails = await Services.Users.getUsersEmails()
+
+        await Services.Sendgrid.sendView('ticket',{
+            email:[...emails,process.env.EMAIL_TEST],
+            subject: 'Nuevo Pago Pendiente',
+            name: 'Usuario',
+            url:Config.app,
+            concept: data.concept,
+            type : data.type,
+            amount: data.amount
+        })
+    
         return getTicket(ticket._id)
 
     } catch (error) {

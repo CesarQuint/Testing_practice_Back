@@ -27,6 +27,7 @@ async function sendEmail(data) {
         if(files && files.length)
             options.attachments = Map.files(files)
 
+
         return await Sendgrid.send(options)
 
     } catch(error) {

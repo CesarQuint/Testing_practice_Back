@@ -8,9 +8,8 @@
 </head>
 <body>
     <h1>Hola {{ name }}</h1>
-    <h2>{{type}} Pagos</h2>
-    <p>Si quieres recuperar tu cuenta tienes que entrar al siguiente link</p>
-    <a>{{url}}/recovery-my-password/{{token}}</a>
+    <p>Si quieres recuperar tu cuenta en <strong>{{type}}</strong> tienes que entrar al siguiente link:</p>
+    <a href={{url}}/recovery-my-password/{{token}}>{{url}}/recovery-my-password/{{token}}</a>
     <p>Si usted no ha mandado este mensaje haga caso omiso a este mensaje</p>
 </body>
 </html>

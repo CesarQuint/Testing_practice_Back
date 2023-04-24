@@ -8,6 +8,7 @@ module.exports = {
     loginUser,
     createUser,
     getUsers,
+    getUsersEmails,
     getUser,
     updateUser,
     updateUserPassword,
@@ -79,6 +80,12 @@ async function getUsers(query) {
     } catch(error) {
         throw error
     }
+}
+
+async function getUsersEmails() {
+    const users = await Model.find()
+    const emails = users.map(user=> user.email)
+    return emails
 }
 
 async function getUser(userId) {

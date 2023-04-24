@@ -8,6 +8,7 @@ module.exports = {
     salt: process.env.SALT,
     cron: process.env.CRON === 'true',
     app: process.env.APP,
+    app_admin:process.env.APP_ADMIN,
     bucket: {
         name: process.env.GOOGLE_STORAGE_NAME,
         type: process.env.GOOGLE_STORAGE_TYPE,

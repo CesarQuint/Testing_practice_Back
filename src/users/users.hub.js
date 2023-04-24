@@ -147,6 +147,7 @@ async function sendEmail(request,response){
             email: fields.email.get(),
             url: request.body.url,
             name: request.body.name,
+            type: request.body.request,
             subject: request.body.subject,
             template: request.body.template
         }

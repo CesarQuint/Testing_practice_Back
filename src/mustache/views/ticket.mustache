@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo Pago Pendiente</title>
+</head>
+
+<body>
+    <h1>Hola {{ name }}</h1>
+    <p>Hay un nuevo pago pendiente en {{type}}</p>
+    <p>Hola,se ha creado un nuevo pago pendiente la informacion es la sigueinte:
+    </p>
+    <div>
+        <ul>
+            <li>Concepto: <strong>{{concept}}</strong></li>
+            <li>Tipo: <strong>{{type}}</strong></li>
+            <li>Cantidad: <strong>${{amount}}.00</strong></li>
+        </ul>
+    </div>
+    <p>Para realizar el pago de este correo abra el siguiente link:</p>
+    <a href={{url}}/home>{{url}}/home</a>
+    <p>Si ya ha realizado el pago de este correo ,haga caso omiso</p>
+</body>
+</html>

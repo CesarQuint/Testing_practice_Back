@@ -36,11 +36,15 @@ async function webhook(data) {
         const metadata = event.data.object.metadata
         const homeId = metadata.homeId.replace('_', '')
         const ticketId = metadata.ticketId.replace('_','')
-
+        const userId = metadata.userId.replace('_', '')
+        const url = metadata.url.replace('_','')
+        
         const ticket = await Services.Tickets.getTicket(ticketId)
         const paymentData = {
             homeId,
             ticketId,
+            userId,
+            url,
             concept: ticket.concept,
             reference: session.payment_intent,
             amount: ticket.amount,
