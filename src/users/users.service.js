@@ -150,18 +150,19 @@ async function sendEmail(data) {
     try {
 
         const user = await Model.findOne({email:data.email})
-
+        
+        if(!user)
+        throw new Messages(data.email).userNotFound
+        
         const token = Methods.cryptoHash(16)
 
-        if(!user)
-            throw new Messages(data.email).userNotFound
-        
         await updateUser(user._id,{token})
 
-        await Services.Sendgrid.sendView('test',{
-            email: process.env.EMAIL_POST || data.email,
-            subject: 'Test',
-            name: 'Usuario',
+        await Services.Sendgrid.sendView(data.template,{
+            email: process.env.EMAIL_TEST || data.email,
+            subject: data.subject,
+            name: data.name,
+            url: data.url,
             token
         })
         

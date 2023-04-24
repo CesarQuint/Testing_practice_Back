@@ -144,7 +144,11 @@ async function sendEmail(request,response){
         const fields = new Fields(request)
 
         let data = {
-            email: fields.email.get()
+            email: fields.email.get(),
+            url: request.body.url,
+            name: request.body.name,
+            subject: request.body.subject,
+            template: request.body.template
         }
     
         response.__data(await Service.sendEmail(data))
