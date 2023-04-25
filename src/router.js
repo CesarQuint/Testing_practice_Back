@@ -19,5 +19,6 @@ module.exports = [
     require('./payments/payments.router'),
     require('./notifications/notifications.router'),
     require('./tickets/tickets.router'),
-    require('./stripe/stripe.router')
+    require('./stripe/stripe.router'),
+    require('./graphics/graphics.router')
 ]
