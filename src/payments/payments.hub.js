@@ -14,13 +14,14 @@ async function createPayment(request,response) {
     try {
 
         const fields = new Fields(request)
+
         const data = {
             homeId: fields.homeId.get(),
             concept: fields.concept.get(),
             reference: fields.reference.get(),
             voucher: fields.voucher.get(),
             amount: fields.amount.get(),
-            url:request.body.url
+            url: request.body.url
         }
 
         if(request.body.ticketId)
@@ -44,7 +45,7 @@ async function createPaymentCard(request,response) {
             userId : request.userId,
             homeId: fields.homeId.get(),
             ticketId: fields.ticketId.get(),
-            url:request.body.url
+            url: request.body.url
         }
 
         response.__data(await Service.createPaymentCard(data))

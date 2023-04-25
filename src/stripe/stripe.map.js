@@ -11,7 +11,9 @@ function createCheckoutRequest(data) {
         customer_email: data.email,
         metadata: {
             homeId: `_${data.homeId}`,
-            ticketId: `_${data.ticketId}`
+            ticketId: `_${data.ticketId}`,
+            userId: `_${data.userId}`,
+            url: `_${data.url}`,
         },
         line_items: [{
             quantity: 1,

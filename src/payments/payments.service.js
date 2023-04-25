@@ -23,10 +23,10 @@ async function createPayment(data) {
             payment.voucher = await Services.Buckets.uploadFile(data.voucher)
 
         await Services.Tickets.updateTicketHome(data.ticketId, data.homeId)
-        
+
         await payment.save()
 
-        user = await Services.Users.getUser(data.userId)
+        const user = await Services.Users.getUser(data.userId)
 
         await Services.Sendgrid.sendView('payment',{
             email: [process.env.EMAIL_TEST,user.email] ,
@@ -37,7 +37,7 @@ async function createPayment(data) {
             amount: data.amount,
             url: data.url
         })
-        
+
         return getPayment(payment._id)
 
     } catch (error) {
@@ -55,9 +55,10 @@ async function createPaymentCard(data) {
             email: user.email,
             homeId: data.homeId,
             ticketId: data.ticketId,
+            userId: data.userId,
             total: ticket.amount,
             concept: ticket.concept,
-            url:data.url
+            url: data.url
         }
 
         return await Services.Stripe.createCheckout(checkoutData)
@@ -95,8 +96,8 @@ async function getPayments(query) {
                 }
             })
 
-            
-        
+
+
         const total = await Model.countDocuments(options)
 
 
@@ -131,14 +132,14 @@ async function updatePayment(paymentId,data) {
         const payment = await getPayment(paymentId)
         const keys = Object.keys(data)
 
-        
+
         keys.forEach(key => {
             payment[key] = data[key]
         })
-        
+
         if(data.voucher)
             payment.voucher = await Services.Buckets.uploadFile(data.voucher)
-        
+
         await payment.save()
         return getPayment(payment._id)
 
