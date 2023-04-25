@@ -131,10 +131,14 @@ async function updatePayment(paymentId,data) {
         const payment = await getPayment(paymentId)
         const keys = Object.keys(data)
 
+        
         keys.forEach(key => {
             payment[key] = data[key]
         })
-
+        
+        if(data.voucher)
+            payment.voucher = await Services.Buckets.uploadFile(data.voucher)
+        
         await payment.save()
         return getPayment(payment._id)
 

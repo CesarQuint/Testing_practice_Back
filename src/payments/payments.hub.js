@@ -98,17 +98,20 @@ async function updatePayment(request,response) {
         let data = {
             paymentId: fields.paymentId.get()
         }
+       
 
         const props = [
             'homeId',
             'concept',
             'reference',
-            'paymentphoto',
             'amount',
             'status'
         ]
 
         props.forEach(prop => request.body[prop] != undefined && (data[prop] = fields[prop].get()))
+
+        if(request.files.voucher)
+            data.voucher = fields.voucher.get()
 
         response.__data(await Service.updatePayment(data.paymentId,data))
 
