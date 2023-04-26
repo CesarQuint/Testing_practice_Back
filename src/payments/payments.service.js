@@ -16,6 +16,7 @@ module.exports = {
 
 async function createPayment(data) {
     try {
+        let user = null
 
         const payment = new Model(data)
 
@@ -26,7 +27,14 @@ async function createPayment(data) {
 
         await payment.save()
 
-        const user = await Services.Users.getUser(data.userId)
+        if(data.userId)
+            user = await Services.Users.getUser(data.userId)
+
+        if(!data.userId){    
+        let home = await Services.Homes.getHome(data.homeId)
+
+        user = await Services.Users.getUser(home.userId)
+        }
 
         await Services.Sendgrid.sendView('payment',{
             email: [process.env.EMAIL_TEST,user.email] ,
