@@ -31,9 +31,9 @@ async function createPayment(data) {
             user = await Services.Users.getUser(data.userId)
 
         if(!data.userId){    
-        let home = await Services.Homes.getHome(data.homeId)
-
-        user = await Services.Users.getUser(home.userId)
+            let home = await Services.Homes.getHome(data.homeId)
+            console.log(home);
+            user = await Services.Users.getUser(home.userId)
         }
 
         await Services.Sendgrid.sendView('payment',{

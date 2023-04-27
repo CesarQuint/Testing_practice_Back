@@ -4,7 +4,7 @@ const Middlewares = require('../middlewares')
 
 Router.get('/graphics/ticket/:ticketId', Middlewares.auth, Hub.getTicketGraphic)
 
-Router.get('/graphics/payments', Middlewares.auth, Hub.getPaymentsGraphic)
+Router.post('/graphics/payments', Middlewares.auth, Hub.getPaymentsGraphic)
 
 
 module.exports = Router
