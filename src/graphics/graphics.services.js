@@ -70,7 +70,9 @@ async function getPaymentsGraphic (data) {
                         $sum:1
                     }
                 }
-            }]
+            },
+           
+        ]
 
 
         )
