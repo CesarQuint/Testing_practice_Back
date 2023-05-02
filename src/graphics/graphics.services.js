@@ -40,7 +40,21 @@ async function getTicketGraphic(ticketId) {
 
 async function getPaymentsGraphic (data) {
     try {
-        console.log(data);
+
+        const group = {
+            year: {
+                $year: '$created'
+            },
+            month: {
+                $month: '$created'
+            },
+        }
+
+        if(data.dateType === 'day')
+            group.date = {
+                $dayOfMonth: '$created'
+            }
+
         const payments = await Payments.aggregate([
             {
                 $match: {
@@ -52,17 +66,7 @@ async function getPaymentsGraphic (data) {
             },
             {
                 $group: {
-                    _id: {
-                        year: {
-                            $year: '$created'
-                        },
-                        month: {
-                            $month: '$created'
-                        },
-                        date: {
-                            $dayOfMonth: '$created'
-                        },
-                    },
+                    _id: group,
                     total: {
                         $sum: '$amount'
                     },
@@ -70,15 +74,17 @@ async function getPaymentsGraphic (data) {
                         $sum:1
                     }
                 }
-            },
-           
-        ]
-
-
-        )
+            }
+        ])
 
         const datasets = payments.map(pay=> pay.total)
-        const labels = payments.map(pay=> `${pay._id.date}/${pay._id.month}/${pay._id.year}`)
+        const labels = payments.map(pay=> {
+
+            if(data.dateType === 'day')
+                return `${pay._id.date}/${pay._id.month}/${pay._id.year}`
+
+            return `${pay._id.month}/${pay._id.year}`
+        })
 
         return{
             datasets,

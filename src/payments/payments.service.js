@@ -86,7 +86,7 @@ async function getPayments(query) {
         if(query.find) {
             const regexp = new RegExp(query.find,'i')
             options.$or = [
-                {name:regexp}
+                {concept:regexp}
             ]
         }
 
