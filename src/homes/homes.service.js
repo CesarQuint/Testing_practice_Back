@@ -54,7 +54,7 @@ async function getHomes(query) {
 
         if(query.userId)
             options.userId = query.userId
-        console.log(options)
+       
 
         query.updated = true
         const homes = await Model.find(options)
@@ -68,7 +68,7 @@ async function getHomes(query) {
                 }
             })
 
-        console.log(homes);
+
 
         const total = await Model.countDocuments(options)
 

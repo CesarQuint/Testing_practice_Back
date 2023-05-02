@@ -32,7 +32,6 @@ async function createPayment(data) {
 
         if(!data.userId){    
             let home = await Services.Homes.getHome(data.homeId)
-            console.log(home);
             user = await Services.Users.getUser(home.userId)
         }
 
