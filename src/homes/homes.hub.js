@@ -17,6 +17,7 @@ async function createHome(request, response) {
 
         const data = {
             userId: fields.userId.get(),
+            alias: fields.alias.get(),
             street: fields.street.get(),
             extnumber: fields.extnumber.get(),
             intnumber: fields.intnumber.get(),
@@ -94,6 +95,7 @@ async function updateHome(request, response) {
         }
 
         const props = [
+            'alias',
             'street',
             'extnumber',
             'intnumber',

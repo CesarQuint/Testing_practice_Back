@@ -26,6 +26,13 @@ module.exports = class Fields {
             value: this.props.homeId,
         })
 
+        this.alias = new Validator({
+            type: 'string',
+            name: 'alias',
+            prop: 'alias',
+            value: this.props.alias,
+        })
+
         this.street = new Validator({
             type: 'string',
             name: 'calle',

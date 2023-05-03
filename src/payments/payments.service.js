@@ -99,7 +99,8 @@ async function getPayments(query) {
             .populate({
                 path: 'home',
                 select: {
-                    address : true
+                    address : true,
+                    alias: true 
                 }
             })
 
