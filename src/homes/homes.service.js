@@ -48,7 +48,8 @@ async function getHomes(query) {
         if(query.find) {
             const regexp = new RegExp(query.find, 'i')
             options.$or = [
-                {address: regexp}
+                {alias: regexp},
+                {address: regexp},
             ]
         }
 

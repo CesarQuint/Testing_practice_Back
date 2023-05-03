@@ -13,6 +13,10 @@ const schema = new Schema({
     userId: {
         type: ObjectId,
     },
+
+    alias: {
+        type: String
+    },
     
     street: {
         type: String
