@@ -19,13 +19,14 @@ async function getTicketGraphic (request,response) {
 
 async function getPaymentsGraphic (request,response) {
     try {
-        data={
+        data = {
             dateType: request.body.dateType,
             datestart: request.body.datestart,
             dateend: request.body.dateend
         }
 
         response.__data(await Service.getPaymentsGraphic(data))
+        
     } catch (error) {
         response.__error(error)
     }

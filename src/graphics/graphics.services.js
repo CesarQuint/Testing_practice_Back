@@ -1,6 +1,4 @@
 const Messages = require('./graphics.messages')
-const Services = require('../services')
-const Utils = require('../utils')
 const Tickets = require('../tickets/tickets.model')
 const Homes = require('../homes/homes.model')
 const Payments = require('../payments/payments.model')
@@ -18,7 +16,7 @@ async function getTicketGraphic(ticketId) {
 
         const homes = await Homes.find()
 
-        const unpaid =homes.length - ticket.homes.length 
+        const unpaid = homes.length - ticket.homes.length 
         
         const paid = ticket.homes.length
 
